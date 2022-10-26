@@ -52,6 +52,7 @@ def sum_to_n? arr, n
 
   # If the length of the array is greater than 1
   if arr.length > 1
+
     # Any combination of number will be tested to see if they add up to n
     return arr.combination(2).any? {|num1, num2| num1 + num2 == n}
 
@@ -107,30 +108,58 @@ end
 
 class BookInStock
 
+  attr_reader :isbn 
+  attr_reader :price
+
   # Constructor of the class
   def initialize(isbn, price)
-    @isbn = isbn
-    @price = price
-  end
 
-  attr_reader :isbn, :price
+    # If the isbn is empty 
+    if isbn.empty?
 
-  def isbn=(isbn)
-    if isbn.empty 
+      # Raises an argument error
+      raise ArgumentError
 
+    # Sets the ISBN number if not empty
+    else
       @isbn = isbn
-      fail ArgumentError, 'Every book must have ISBN code number.'
+    end
 
+    # If the price is set to 0 or less
+    if price <= 0
+
+      # Raises an argument error
+      raise ArgumentError
+
+    # Sets the price if not 0 or less
+    else
+      @price = price
     end
   end
 
-  def price=(price)
-    @price = price
-    fail ArgumentError, 'Every book must have price value.' unless price > 0
-
+  # Gets the ISBN number
+  def getIsbn
+    @isbn
+  end
+  
+  # Gets the price
+  def getPrice
+    @price
   end
 
+  # Sets the ISBN number
+  def isbn=(isbn)
+    @isbn = isbn
+  end
+
+  # Sets the price of the book
+  def price=(price)
+    @price = price
+  end
+
+  # Converts the price into a string
   def price_as_string
     format '$%.2f', @price
   end
+
 end
