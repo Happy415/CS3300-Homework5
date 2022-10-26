@@ -108,8 +108,8 @@ end
 
 class BookInStock
 
-  attr_reader :isbn 
-  attr_reader :price
+  attr_accessor :isbn 
+  attr_accessor :price
 
   # Constructor of the class
   def initialize(isbn, price)
